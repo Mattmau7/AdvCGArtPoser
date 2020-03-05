@@ -7,7 +7,9 @@ public class BodySourceManager : MonoBehaviour
     private KinectSensor _Sensor;
     private BodyFrameReader _Reader;
     private Body[] _Data = null;
-    
+    private ulong _trackingID = 0;
+
+    public CustomGestureManager gestureManager;
     public Body[] GetData()
     {
         return _Data;
@@ -40,11 +42,29 @@ public class BodySourceManager : MonoBehaviour
                 {
                     _Data = new Body[_Sensor.BodyFrameSource.BodyCount];
                 }
-                
+                _trackingID = 0;
                 frame.GetAndRefreshBodyData(_Data);
                 
                 frame.Dispose();
                 frame = null;
+
+                foreach(var body in _Data)
+                {
+                    if (body != null && body.IsTracked)
+                    {
+                        _trackingID = body.TrackingId;
+
+
+                        if (gestureManager != null)
+                        {
+                            gestureManager.SetTrackingID(body.TrackingId);
+                        }
+                        break;
+                    }
+
+
+                }
+
             }
         }    
     }

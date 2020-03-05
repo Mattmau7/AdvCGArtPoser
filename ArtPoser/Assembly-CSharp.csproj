@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\BodySourceView.cs" />
      <Compile Include="Assets\Scripts\ColorSourceManager.cs" />
      <Compile Include="Assets\Scripts\ColorSourceView.cs" />
+     <Compile Include="Assets\Scripts\CustomGestureManager.cs" />
      <Compile Include="Assets\Scripts\DepthSourceManager.cs" />
      <Compile Include="Assets\Scripts\DepthSourceView.cs" />
      <Compile Include="Assets\Scripts\DisableOnStart.cs" />
@@ -66,31 +67,31 @@
      <Compile Include="Assets\Scripts\InfraredSourceView.cs" />
      <Compile Include="Assets\Scripts\MultiSourceManager.cs" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Project/ArtPoser/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
