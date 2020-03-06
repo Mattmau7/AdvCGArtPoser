@@ -78,18 +78,32 @@ public class CustomGestureManager : MonoBehaviour
 
         gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/" + databaseName + ".gbd");//get the database
         gestureFrameSource = VisualGestureBuilderFrameSource.Create(kinect, 0);//create the frame source
+        Pose[] poses = GameObject.FindObjectsOfType<Pose>();
+       
+         
+
+        
         foreach (var gesture in gestureDatabase.AvailableGestures)
         {
+         for (int i = 0; i<poses.Length; i++)
+        {
+                if (gesture.Name.Equals(poses[i].GetGestureName()))
+                {
+                    CustomGesture tempGesture;//create the new struct
+                    tempGesture.gesture = gesture;
+                    tempGesture.trigger = poses[i].GetEvent();
+                    gestures.Add(tempGesture);//add it to the list
+
+                }
+            }
+          //  Debug.Log(gesture.Name);
             gestureFrameSource.AddGesture(gesture);//add all the available gestures in the database to the frame source
         }
+      
         gestureFrameReader = gestureFrameSource.OpenReader();
         gestureFrameReader.IsPaused = true;
-        Pose[] poses = GameObject.FindObjectsOfType<Pose>();
-        for(int i = 0; i < poses.Length; i++)
-        {
-            poses[i].RegisterGestures();
-        }
-        }
+       
+    }
 
    
 
