@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\InfraredSourceManager.cs" />
      <Compile Include="Assets\Scripts\InfraredSourceView.cs" />
      <Compile Include="Assets\Scripts\MultiSourceManager.cs" />
+     <Compile Include="Assets\Scripts\Pose.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/100592704/Desktop/Advanced Computer Graphics/ArtPoser/Git/ArtPoser/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
