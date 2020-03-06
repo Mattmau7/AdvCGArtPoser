@@ -84,7 +84,11 @@ public class CustomGestureManager : MonoBehaviour
         }
         gestureFrameReader = gestureFrameSource.OpenReader();
         gestureFrameReader.IsPaused = true;
-
+        Pose[] poses = GameObject.FindObjectsOfType<Pose>();
+        for(int i = 0; i < poses.Length; i++)
+        {
+            poses[i].RegisterGestures();
+        }
         }
 
    
@@ -93,7 +97,7 @@ public class CustomGestureManager : MonoBehaviour
     {
         foreach (var gesture in gestureDatabase.AvailableGestures)// loop for all gestures available in the database
         {
-            if (gesture.Name == name)//if the gesture is found
+            if (gesture.Name.Equals(name))//if the gesture is found
             {
                 CustomGesture tempGesture;//create the new struct
                 tempGesture.gesture = gesture;

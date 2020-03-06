@@ -12,9 +12,12 @@ public class Pose : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CustomGestureManager.customGestureManager.AddCustomGesture(poseName,poseEvent);//Adds the gesture to the list of poses to look for and sets the function to call when the pose is triggered
+      
     }
-
+    public void RegisterGestures()
+    {
+        CustomGestureManager.customGestureManager.AddCustomGesture(poseName, poseEvent);//Adds the gesture to the list of poses to look for and sets the function to call when the pose is triggered
+    }
     // Update is called once per frame
     void Update()
     {
