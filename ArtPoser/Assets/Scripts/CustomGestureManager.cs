@@ -5,16 +5,23 @@ using UnityEngine.Events;
 using Windows.Kinect;
 using Microsoft.Kinect.VisualGestureBuilder;
 
-
+public struct CustomGesture
+{
+    public Gesture gesture;
+    public UnityEvent trigger;
+};
 
 public class CustomGestureManager : MonoBehaviour
 {
+    public static CustomGestureManager customGestureManager;
+
+
     VisualGestureBuilderDatabase gestureDatabase;
     VisualGestureBuilderFrameSource gestureFrameSource;
     VisualGestureBuilderFrameReader gestureFrameReader;
     KinectSensor kinect;
     
-    List<Gesture> gestures = new List<Gesture>();
+    List<CustomGesture> gestures = new List<CustomGesture>();
 
     [SerializeField]
     string databaseName;
@@ -38,10 +45,10 @@ public class CustomGestureManager : MonoBehaviour
                 {
                     for (int i = 0; i < gestures.Count; i++)
                     {
-                        result = frame.DiscreteGestureResults[gestures[i]];
+                        result = frame.DiscreteGestureResults[gestures[i].gesture];
                         if (result.Detected == true)
                         {
-                            Debug.Log("Recognized gesture: " + gestures[i].Name);
+                            gestures[i].trigger.Invoke();
                         }
                     }
 
@@ -61,6 +68,12 @@ public class CustomGestureManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (customGestureManager != null)
+        {
+            Destroy(this);
+        }
+        customGestureManager = this;
+
         kinect = KinectSensor.GetDefault();
 
         gestureDatabase = VisualGestureBuilderDatabase.Create(Application.streamingAssetsPath + "/" + databaseName + ".gbd");
@@ -76,13 +89,16 @@ public class CustomGestureManager : MonoBehaviour
 
    
 
-    public void AddCustomGesture(string name)
+    public void AddCustomGesture(string name, UnityEvent e)
     {
         foreach (var gesture in gestureDatabase.AvailableGestures)
         {
             if (gesture.Name == name)
             {
-                gestures.Add(gesture);
+                CustomGesture tempGesture;
+                tempGesture.gesture = gesture;
+                tempGesture.trigger = e;
+                gestures.Add(tempGesture);
             }
         }
     }
