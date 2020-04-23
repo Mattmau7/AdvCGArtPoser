@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\DisableOnStart.cs" />
     <Compile Include="Assets\Scripts\InfraredSourceManager.cs" />
     <Compile Include="Assets\Scripts\InfraredSourceView.cs" />
+    <Compile Include="Assets\Scripts\InterfaceManager.cs" />
     <Compile Include="Assets\Scripts\MultiSourceManager.cs" />
     <Compile Include="Assets\Scripts\Pose.cs" />
     <Reference Include="Unity.Timeline.Editor">
