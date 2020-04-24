@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Windows.Kinect;
 using Microsoft.Kinect.VisualGestureBuilder;
+
 
 public struct CustomGesture//structure containing both a gesture and the function to call when its detected
 {
     public Gesture gesture;
-    public UnityEvent trigger;
+    //public UnityEvent trigger;
+    public Mesh mesh;
 };
 
 public class CustomGestureManager : MonoBehaviour
@@ -22,9 +25,15 @@ public class CustomGestureManager : MonoBehaviour
     KinectSensor kinect;
     
     List<CustomGesture> gestures = new List<CustomGesture>();
-
+    public GameObject captureButton;
+    public GameObject errorMessage;
+    public GameObject Model;
     [SerializeField]
     string databaseName;
+
+    
+
+    bool canPose = false;
 
     public void SetTrackingID(ulong id)//set the tracking id
     {
@@ -35,34 +44,50 @@ public class CustomGestureManager : MonoBehaviour
 
     void FrameArrived(object sender, VisualGestureBuilderFrameArrivedEventArgs e)
     {
-        VisualGestureBuilderFrameReference frameReference = e.FrameReference;
-        using (VisualGestureBuilderFrame frame = frameReference.AcquireFrame())
+        if (canPose)
         {
-            if (frame != null && frame.DiscreteGestureResults != null)
+            VisualGestureBuilderFrameReference frameReference = e.FrameReference;
+            using (VisualGestureBuilderFrame frame = frameReference.AcquireFrame())
             {
-                DiscreteGestureResult result = null;
-                if (frame.DiscreteGestureResults.Count > 0)//if there is one or more potential gesture being detected by the kinect
+                if (frame != null && frame.DiscreteGestureResults != null)
                 {
-                    for (int i = 0; i < gestures.Count; i++)//for each gesture in the database
+                    DiscreteGestureResult result = null;
+                    if (frame.DiscreteGestureResults.Count > 0)//if there is one or more potential gesture being detected by the kinect
                     {
-                        result = frame.DiscreteGestureResults[gestures[i].gesture];//get the result of gesture i
-                        if (result.Detected == true)//if gesture i was detected
+                        for (int i = 0; i < gestures.Count; i++)//for each gesture in the database
                         {
-                            gestures[i].trigger.Invoke();//call the unityevent attacked to the gesture
+                            result = frame.DiscreteGestureResults[gestures[i].gesture];//get the result of gesture i
+                            if (result.Detected == true)//if gesture i was detected
+                            {
+                                //   gestures[i].trigger.Invoke();//call the unityevent attacked to the gesture
+                                Model.SetActive(true);
+                                Model.GetComponent<MeshFilter>().mesh = gestures[i].mesh;
+                                StopCapture();
+                                
+                            }
                         }
+
+
                     }
+
 
 
                 }
 
 
-
             }
-
-
         }
     }
 
+    IEnumerator PoseTimer()
+    {
+        yield return new WaitForSeconds(10);
+        if (canPose)
+        {
+            errorMessage.SetActive(true);
+            StopCapture();
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -91,7 +116,7 @@ public class CustomGestureManager : MonoBehaviour
                 {
                     CustomGesture tempGesture;//create the new struct
                     tempGesture.gesture = gesture;
-                    tempGesture.trigger = poses[i].GetEvent();
+                    tempGesture.mesh = poses[i].GetMesh();
                     gestures.Add(tempGesture);//add it to the list
 
                 }
@@ -107,7 +132,7 @@ public class CustomGestureManager : MonoBehaviour
 
    
 
-    public void AddCustomGesture(string name, UnityEvent e)//Adds the gesture to the list of poses to look for and sets the function to call when the pose is triggered
+    public void AddCustomGesture(string name, Mesh m)//Adds the gesture to the list of poses to look for and sets the function to call when the pose is triggered
     {
         foreach (var gesture in gestureDatabase.AvailableGestures)// loop for all gestures available in the database
         {
@@ -115,14 +140,26 @@ public class CustomGestureManager : MonoBehaviour
             {
                 CustomGesture tempGesture;//create the new struct
                 tempGesture.gesture = gesture;
-                tempGesture.trigger = e;
+                tempGesture.mesh = m;
                 gestures.Add(tempGesture);//add it to the list
             }
         }
     }
 
+    public void StopCapture()
+    {
+        StopAllCoroutines();
+        captureButton.SetActive(true);
+        canPose = false;
+    }
 
-
+    public void CapturePose()
+    {
+        errorMessage.SetActive(false);
+        canPose = true;
+        StartCoroutine(PoseTimer());
+        Model.SetActive(false);
+    }
    
 
 
